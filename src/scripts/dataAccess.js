@@ -64,7 +64,7 @@ export const saveCompletion = (project) => {
     }
 
 
-    return fetch(`${API}/plumbers`, fetchOptions)
+    return fetch(`${API}/completions`, fetchOptions)
         .then(response => response.json())
         .then(() => {
             mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
@@ -87,4 +87,7 @@ export const getRequests = () => {
 }
 export const getPlumbers = () => {
     return applicationState.plumbers.map(plumber => ({ ...plumber }))
+}
+export const getCompletions = () => {
+    return applicationState.completions.map(job => ({ ...job }))
 }

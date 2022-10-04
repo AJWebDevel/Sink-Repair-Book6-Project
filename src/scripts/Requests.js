@@ -1,4 +1,4 @@
-import { deleteRequest, getRequests, getPlumbers, saveCompletion } from "./dataAccess.js"
+import { deleteRequest, getRequests, getPlumbers, saveCompletion, getCompletions } from "./dataAccess.js"
 
 //function to convert individual requests into html <li> representations
 //1parameter & returns html
@@ -34,6 +34,28 @@ export const Requests = () => {
 
     return html
 }
+const convertCompletionsToListElement = (pen) => {
+    const completions = getCompletions()
+    return completions.map(job => {
+        return `<li id="${job.id}" class="partyRequest"> ${job.requestId} was completed by Plumber No. ${job.plumberId}.
+            <button class="request__delete"
+            id="request--${job.id}"> Delete
+            </button>  
+        </li > `
+    })
+}
+
+
+export const Completions = () => {
+
+    const completions = getCompletions()
+    let html = `<ul>
+    ${convertCompletionsToListElement(completions).join(" ")
+        } 
+        </ul >`
+
+    return html
+}
 
 const mainContainer = document.querySelector("#container")
 
@@ -53,10 +75,7 @@ mainContainer.addEventListener(
             const projectPlumberId = parseInt(plumberId)
             const projectDate = Date
             /*
-                This object should have 3 properties
-                   1. requestId
-                   2. plumberId
-                   3. date_created
+                This object should have 3 properties 1. requestId 2. plumberId 3. date_created
             */
             const completion = {
                 requestId: projectRequestId,
