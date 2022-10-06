@@ -1,6 +1,7 @@
-import { Requests } from "./Requests.js"
+
 import { ServiceForm } from "./ServiceForm.js"
-import { Completions } from "./Requests.js"
+
+import { convertRequestsToListElement } from "./Requests.js"
 
 export const SinkRepair = () => {
     return `
@@ -9,15 +10,9 @@ export const SinkRepair = () => {
     ${ServiceForm()}
     </section>
 
-    <section class="serviceRequests">
-        <h2>Service Requests</h2>
-        ${Requests()}
-    </section>
-
-    <section class="completedJobs">
-        <h2>Completed Jobs</h2>
-        ${Completions()}
-    </section>
+    <div>
+   ${convertRequestsToListElement()}
+   </div>
     `
 }
 

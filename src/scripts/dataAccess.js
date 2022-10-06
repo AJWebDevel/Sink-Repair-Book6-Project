@@ -4,8 +4,9 @@ const applicationState = {
     completions: []
 }
 
-const API = "http://localhost:8088"
+const API = "http://localhost:8080"
 
+//fetch functions to get data from api for plumbers, completions, and requests
 export const fetchRequests = () => {
     return fetch(`${API}/requests`)
         .then(response => response.json())
@@ -35,8 +36,10 @@ export const fetchCompletions = () => {
         )
 }
 
+//define mainContainer
 const mainContainer = document.querySelector("#container")
 
+//function to send request to the database
 export const sendRequest = (userServiceRequest) => {
     const fetchOptions = {
         method: "POST",
@@ -54,6 +57,8 @@ export const sendRequest = (userServiceRequest) => {
 
         })
 }
+
+//function to save request as completion to the completed jobs array
 export const saveCompletion = (project) => {
     const fetchOptions = {
         method: "POST",
@@ -72,6 +77,7 @@ export const saveCompletion = (project) => {
         })
 }
 
+//
 export const deleteRequest = (id) => {
     return fetch(`${API}/requests/${id}`, { method: "DELETE" })
         .then(
